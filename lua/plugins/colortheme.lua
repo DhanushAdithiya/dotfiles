@@ -6,5 +6,6 @@ return {
 	config = function()
 		vim.cmd.colorscheme  "tokyonight"
 		vim.cmd([[highlight Normal guibg=none]])
+		vim.cmd([[highlight NormalFloat guibg=none]])
 	end,
 }

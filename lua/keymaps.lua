@@ -7,7 +7,11 @@ vim.o.signcolumn="yes"
 vim.opt.guicursor = ""
 vim.opt.mouse="a"
 vim.cmd("highlight clear SignColumn")
-
+vim.o.clipboard = 'unnamedplus'
+vim.o.undofile = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.completeopt = 'menuone,noselect'
 
 -- KEYMAPS
 vim.api.nvim_set_keymap('n', 'j', 'gj', {noremap = true, silent = true})
