@@ -1,0 +1,48 @@
+-- BASE CONFIG
+vim.cmd("set tabstop=2")
+vim.cmd("set shiftwidth=2")
+vim.cmd("set rnu")
+vim.cmd("set nu")
+vim.o.signcolumn="yes"
+vim.opt.guicursor = ""
+vim.opt.mouse="a"
+vim.cmd("highlight clear SignColumn")
+
+
+-- KEYMAPS
+vim.api.nvim_set_keymap('n', 'j', 'gj', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-n>', ':Explore<CR>', {noremap = true, silent = true})
+vim.keymap.set('x', '>', '>gv')
+vim.keymap.set('x', '<', '<gv')
+vim.keymap.set("n", "<A-j>", "<cmd>m +1<CR>==")
+vim.keymap.set("n", "<A-k>", "<cmd>m -2<CR>==")
+vim.keymap.set("v", "<A-j>", "<cmd>m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", "<cmd>m '<-2<CR>gv=gv")
+
+-- LSP KEYMAPS
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, {})
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {})
+vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, {})
+vim.keymap.set({'n', 'v'}, '<leader>ca',vim.lsp.buf.code_action, {})
+vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, {})
+
+
+-- TELESCOPE
+local builtin = require("telescope.builtin")
+vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+
+
+--HARPOON
+local mark = require("harpoon.mark")
+local ui = require("harpoon.ui")
+
+vim.keymap.set("n", "<leader>h", mark.add_file)
+vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
