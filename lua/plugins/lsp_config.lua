@@ -18,10 +18,26 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function()
-      local lspconfig = require("lspconfig")
+			local on_attach = require("lspconfig.configs").on_attach
+			local capabilities = require("lspconfig.configs").capabilities
+			local lspconfig = require("lspconfig")
+			local util = require("lspconfig/util")
       lspconfig.tsserver.setup({})
       lspconfig.lua_ls.setup({})
-			lspconfig.rust_analyzer.setup({})
+			lspconfig.rust_analyzer.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				fileypes = {"rust"},
+				root_dir = util.root_pattern("Cargo.toml"),
+				settings = {
+					['rust_analyzer'] = {
+						cargo = {
+							allFeatures = true,
+						}
+					}
+				}
+
+			})
 
     end
   },
