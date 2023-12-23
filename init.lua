@@ -1,4 +1,6 @@
 vim.g.mapleader = " "
+vim.cmd([[highlight Normal guibg=none]])
+
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
