@@ -4,8 +4,14 @@ return {
   priority = 1000,
   opts = {},
 	config = function()
+		require("tokyonight").setup({
+			transparent = false,
+			terminal_colors = true,
+			styles = {
+				comments = { italic = false },
+				keywords = { italic = false },
+			}
+		})
 		vim.cmd.colorscheme  "tokyonight"
-		vim.cmd([[highlight Normal guibg=none]])
-		vim.cmd([[highlight NormalFloat guibg=none]])
 	end,
 }

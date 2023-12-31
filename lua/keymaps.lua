@@ -19,10 +19,6 @@ vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<C-n>', ':Explore<CR>', {noremap = true, silent = true})
 vim.keymap.set('x', '>', '>gv')
 vim.keymap.set('x', '<', '<gv')
-vim.keymap.set("n", "<A-j>", "<cmd>m +1<CR>==")
-vim.keymap.set("n", "<A-k>", "<cmd>m -2<CR>==")
-vim.keymap.set("v", "<A-j>", "<cmd>m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<A-k>", "<cmd>m '<-2<CR>gv=gv")
 
 -- LSP KEYMAPS
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
