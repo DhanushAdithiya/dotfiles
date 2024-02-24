@@ -4,11 +4,12 @@ vim.cmd("set shiftwidth=2")
 vim.cmd("set rnu")
 vim.cmd("set nu")
 vim.o.signcolumn="yes"
-vim.opt.guicursor = ""
+--vim.opt.guicursor = ""
 vim.opt.mouse="a"
 vim.cmd("highlight clear SignColumn")
 vim.o.clipboard = 'unnamedplus'
 vim.o.undofile = true
+vim.o.cursorline = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.completeopt = 'menuone,noselect'
@@ -46,3 +47,8 @@ local ui = require("harpoon.ui")
 
 vim.keymap.set("n", "<leader>h", mark.add_file)
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+
+
+vim.cmd [[command! W w]]
+vim.cmd [[command! Q q]]
+vim.cmd [[command! Wq wq]]

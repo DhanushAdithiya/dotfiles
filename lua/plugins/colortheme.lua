@@ -1,17 +1,31 @@
 return {
-  "folke/tokyonight.nvim",
+"blazkowolf/gruber-darker.nvim",
   lazy = false,
   priority = 1000,
   opts = {},
 	config = function()
-		require("tokyonight").setup({
-			transparent = true,
-			terminal_colors = true,
-			styles = {
-				comments = { italic = false },
-				keywords = { italic = false },
-			}
-		})
-		vim.cmd.colorscheme  "tokyonight"
+--		require("boring").setup({
+--		transparent = false, -- Enable this to disable the bg color
+--		styles = {
+--			-- You can set any of the style values specified for `:h nvim_set_hl`
+--			comments = {},
+--			keywords = {},
+--			functions = {},
+--			variables = {},
+--			type = { bold = true },
+--			lsp = { underline = true }
+--		},
+--	})
+		vim.cmd.colorscheme  "gruber-darker"
 	end,
 }
+
+
+--		require("tokyonight").setup({
+--			terminal_colors = true,
+--			styles = {
+--				comments = { italic = false },
+--				keywords = { italic = false },
+--			}
+--		})
+
