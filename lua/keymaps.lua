@@ -17,7 +17,7 @@ vim.o.completeopt = 'menuone,noselect'
 -- KEYMAPS
 vim.api.nvim_set_keymap('n', 'j', 'gj', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<C-n>', ':Explore<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-b>', ':Explore<CR>', {noremap = true, silent = true})
 vim.keymap.set('x', '>', '>gv')
 vim.keymap.set('x', '<', '<gv')
 
@@ -44,6 +44,10 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 --HARPOON
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
+
+
+-- UNDO TREE
+vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
 
 vim.keymap.set("n", "<leader>h", mark.add_file)
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
