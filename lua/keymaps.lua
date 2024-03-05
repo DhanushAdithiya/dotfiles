@@ -12,8 +12,10 @@ vim.o.undofile = true
 vim.o.cursorline = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.o.showmode = false
 vim.o.completeopt = 'menuone,noselect'
-
+vim.opt.hlsearch = true
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- KEYMAPS
 vim.api.nvim_set_keymap('n', 'j', 'gj', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true, silent = true})
@@ -31,8 +33,11 @@ vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {})
 vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, {})
-vim.keymap.set({'n', 'v'}, '<leader>ca',vim.lsp.buf.code_action, {})
 vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, {})
+vim.keymap.set({'n', 'v'}, '<leader>ca',vim.lsp.buf.code_action, {})
+vim.keymap.set('n', '<M-k>', ':move-2<CR>')
+vim.keymap.set('n', '<M-j>', ':move+<CR>')
+
 
 
 -- TELESCOPE
