@@ -24,7 +24,21 @@ return {
 			local util = require("lspconfig/util")
       lspconfig.tsserver.setup({})
       lspconfig.lua_ls.setup({})
-			lspconfig.pyright.setup({})
+			lspconfig.pyright.setup({
+				on_attach = on_attach,
+				settings = {
+					pyright = {
+						autoImportCompletion = true,
+					},
+				python = {
+						analysis = {
+							autoSearchPaths = true,
+							diagnosticMode = 'openFilesOnly',
+							useLibraryCodeForTypes = true,
+							typeCheckingMode = 'off'}
+					}
+				}
+			})
 			lspconfig.rust_analyzer.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,

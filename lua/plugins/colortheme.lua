@@ -1,5 +1,5 @@
 return {
-"blazkowolf/gruber-darker.nvim",
+"Alligator/accent.vim",
   lazy = false,
   priority = 1000,
   opts = {},
@@ -16,7 +16,7 @@ return {
 --			lsp = { underline = true }
 --		},
 --	})
-		vim.cmd.colorscheme  "gruber-darker"
+		vim.cmd.colorscheme  "accent"
 	end,
 }
 
