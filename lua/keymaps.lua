@@ -1,11 +1,11 @@
 -- BASE CONFIG
 vim.cmd("set tabstop=2")
-vim.o.signcolumn="yes"
+vim.o.signcolumn = "yes"
 vim.cmd("set shiftwidth=2")
 vim.cmd("set rnu")
 vim.cmd("set nu")
 vim.opt.guicursor = ""
-vim.opt.mouse="a"
+vim.opt.mouse = "a"
 vim.cmd("highlight clear SignColumn")
 vim.o.clipboard = 'unnamedplus'
 vim.o.undofile = true
@@ -22,9 +22,9 @@ vim.keymap.set('n', '<a-K>', ":move-2<CR>")
 
 
 -- KEYMAPS
-vim.api.nvim_set_keymap('n', 'j', 'gj', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<C-b>', ':Explore<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-b>', ':Explore<CR>', { noremap = true, silent = true })
 vim.keymap.set('x', '<', '<gv')
 vim.keymap.set('x', '>', '>gv')
 
@@ -42,7 +42,7 @@ vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
 vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, {})
 vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols)
 vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols)
-vim.keymap.set({'n', 'v'}, '<leader>ca',vim.lsp.buf.code_action, {})
+vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
 
 
 -- STOLEN REMAPS
@@ -54,10 +54,12 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("n", "Q", "<nop>")
+
+
 
 
 -- TELESCOPE
@@ -83,3 +85,14 @@ vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
 vim.cmd [[command! W w]]
 vim.cmd [[command! Q q]]
 vim.cmd [[command! Wq wq]]
+
+
+
+-- transparent window
+function Transparent()
+	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+end
+
+
+vim.api.nvim_set_keymap('n', '<leader>t', ':lua Transparent()<CR>', { noremap = true, silent = true })
