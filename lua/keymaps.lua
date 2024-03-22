@@ -94,5 +94,13 @@ function Transparent()
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
+vim.keymap.set('n', '<leader>t', ':lua Transparent()<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>t', ':lua Transparent()<CR>', { noremap = true, silent = true })
+-- FUGITIVE keymap
+vim.keymap.set('n', '<leader>vfd', ':below G diff %<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>vfgd', ':below G diff<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>vfl', ':below G log<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>vfs', ':below G status<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>vfc', ':below G commit<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>vfp', ':below G push<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>vfg', ':below G <CR>', { noremap = true })
