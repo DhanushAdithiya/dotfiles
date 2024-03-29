@@ -24,6 +24,7 @@ return {
 			local util = require("lspconfig/util")
       lspconfig.tsserver.setup({})
       lspconfig.lua_ls.setup({})
+			lspconfig.clangd.setup({})
 			lspconfig.pyright.setup({
 				on_attach = on_attach,
 				settings = {

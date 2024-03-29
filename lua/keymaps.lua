@@ -4,7 +4,7 @@ vim.o.signcolumn = "yes"
 vim.cmd("set shiftwidth=2")
 vim.cmd("set rnu")
 vim.cmd("set nu")
-vim.opt.guicursor = ""
+--vim.opt.guicursor = ""
 vim.opt.mouse = "a"
 vim.cmd("highlight clear SignColumn")
 vim.o.clipboard = 'unnamedplus'
