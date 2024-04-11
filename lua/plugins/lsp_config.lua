@@ -22,9 +22,25 @@ return {
 			local capabilities = require("lspconfig.configs").capabilities
 			local lspconfig = require("lspconfig")
 			local util = require("lspconfig/util")
-      lspconfig.tsserver.setup({})
-      lspconfig.lua_ls.setup({})
-			lspconfig.clangd.setup({})
+			--
+			-- LSP CONFIGS
+			--
+			lspconfig.gopls.setup( {
+				on_attach = on_attach,
+				capabilities = capabilities,
+				})
+      lspconfig.tsserver.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+      lspconfig.lua_ls.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+			lspconfig.clangd.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
 			lspconfig.pyright.setup({
 				on_attach = on_attach,
 				settings = {

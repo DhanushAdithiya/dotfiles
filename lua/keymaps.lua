@@ -86,16 +86,6 @@ vim.cmd [[command! W w]]
 vim.cmd [[command! Q q]]
 vim.cmd [[command! Wq wq]]
 
-
-
--- transparent window
-function Transparent()
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-end
-
-vim.keymap.set('n', '<leader>t', ':lua Transparent()<CR>', { noremap = true, silent = true })
-
 -- FUGITIVE keymap
 vim.keymap.set('n', '<leader>vfd', ':below G diff %<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>vfgd', ':below G diff<CR>', { noremap = true })
