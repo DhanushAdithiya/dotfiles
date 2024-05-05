@@ -1,39 +1,29 @@
 return {
-	"Shatur/neovim-ayu",
+	"folke/tokyonight.nvim",
 	lazy = false,
 	priority = 1000,
 	opts = {},
 	config = function()
-		--		require("boring").setup({
-		--		transparent = false, -- Enable this to disable the bg color
-		--		styles = {
-		--			-- You can set any of the style values specified for `:h nvim_set_hl`
-		--			comments = {},
-		--			keywords = {},
-		--			functions = {},
-		--			variables = {},
-		--			type = { bold = true },
-		--			lsp = { underline = true }
-		--		},
-		--	})
-		-- transparent window
+		require("tokyonight").setup({
+			terminal_colors = true,
+
+			styles = {
+				comments = { italic = false },
+
+				keywords = { italic = false },
+			}
+		})
 		function Transparent()
 			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 		end
 
-		vim.keymap.set('n', '<leader>t', ':lua Transparent()<CR>', { noremap = true, silent = true })
-		vim.keymap.set('n', '<leader>ot', ':colorscheme ayu-mirage<CR>', {noremap = true, silent = true})
+		local colorscheme = "tokyonight-night"
+		vim.cmd.colorscheme 'tokyonight-night'
 
-		vim.cmd.colorscheme "ayu-mirage"
+
+		vim.keymap.set('n', '<leader>t', ':lua Transparent()<CR>', { noremap = true, silent = true })
+		vim.keymap.set('n', '<leader>ot', string.format(':colorscheme %s<CR>', colorscheme),
+			{ noremap = true, silent = true })
 	end,
 }
-
-
---		require("tokyonight").setup({
---			terminal_colors = true,
---			styles = {
---				comments = { italic = false },
---				keywords = { italic = false },
---			}
---		})

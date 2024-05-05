@@ -1,23 +1,23 @@
 return {
-  {
-    "williamboman/mason.nvim",
-    lazy = false,
-    config = function()
-      require("mason").setup()
-    end
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "tsserver", "rust_analyzer"}
-      })
-    end
-  },
-  {
-    "neovim/nvim-lspconfig",
-    lazy = false,
-    config = function()
+	{
+		"williamboman/mason.nvim",
+		lazy = false,
+		config = function()
+			require("mason").setup()
+		end
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		config = function()
+			require("mason-lspconfig").setup({
+				ensure_installed = { "lua_ls", "tsserver", "rust_analyzer" }
+			})
+		end
+	},
+	{
+		"neovim/nvim-lspconfig",
+		lazy = false,
+		config = function()
 			local on_attach = require("lspconfig.configs").on_attach
 			local capabilities = require("lspconfig.configs").capabilities
 			local lspconfig = require("lspconfig")
@@ -25,15 +25,15 @@ return {
 			--
 			-- LSP CONFIGS
 			--
-			lspconfig.gopls.setup( {
-				on_attach = on_attach,
-				capabilities = capabilities,
-				})
-      lspconfig.tsserver.setup({
+			lspconfig.gopls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-      lspconfig.lua_ls.setup({
+			lspconfig.tsserver.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+			lspconfig.lua_ls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
@@ -43,23 +43,23 @@ return {
 			})
 			lspconfig.pyright.setup({
 				on_attach = on_attach,
+				capabilities = capabilities,
 				settings = {
 					pyright = {
 						autoImportCompletion = true,
 					},
-				python = {
+					python = {
 						analysis = {
 							autoSearchPaths = true,
-							diagnosticMode = 'openFilesOnly',
 							useLibraryCodeForTypes = true,
-							typeCheckingMode = 'off'}
+						}
 					}
 				}
 			})
 			lspconfig.rust_analyzer.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
-				fileypes = {"rust"},
+				fileypes = { "rust" },
 				root_dir = util.root_pattern("Cargo.toml"),
 				settings = {
 					['rust_analyzer'] = {
@@ -70,24 +70,23 @@ return {
 				}
 
 			})
+		end
+	},
 
-    end
-  },
+	{ -- Autocompletion
+		'hrsh7th/nvim-cmp',
+		dependencies = {
+			-- Snippet Engine & its associated nvim-cmp source
+			'L3MON4D3/LuaSnip',
+			'saadparwaiz1/cmp_luasnip',
 
-	{-- Autocompletion
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
+			-- Adds LSP completion capabilities
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-path',
 
-      -- Adds LSP completion capabilities
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-
-      -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
-    },
+			-- Adds a number of user-friendly snippets
+			'rafamadriz/friendly-snippets',
+		},
 
 		config = function()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -141,6 +140,6 @@ return {
 					{ name = 'path' },
 				},
 			}
-	end
+		end
 	}
 }

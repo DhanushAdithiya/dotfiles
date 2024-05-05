@@ -9,7 +9,7 @@ vim.opt.mouse = "a"
 vim.cmd("highlight clear SignColumn")
 vim.o.clipboard = 'unnamedplus'
 vim.o.undofile = true
-vim.o.cursorline = true
+vim.o.cursorline = false
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.showmode = false
@@ -59,9 +59,6 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("n", "Q", "<nop>")
 
-
-
-
 -- TELESCOPE
 local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
@@ -70,17 +67,16 @@ vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch curren
 vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
 
+-- UNDO TREE
+vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
+
 --HARPOON
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
-
--- UNDO TREE
-vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
-
+-- HARPOON
 vim.keymap.set("n", "<leader>h", mark.add_file)
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
-
 
 vim.cmd [[command! W w]]
 vim.cmd [[command! Q q]]
@@ -94,3 +90,12 @@ vim.keymap.set('n', '<leader>vfs', ':below G status<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>vfc', ':below G commit<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>vfp', ':below G push<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>vfg', ':below G <CR>', { noremap = true })
+
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+	desc = 'Highlight when yanking (copying) text',
+	group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
