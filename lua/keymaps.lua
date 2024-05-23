@@ -1,27 +1,3 @@
--- BASE CONFIG
-vim.cmd("set tabstop=2")
-vim.o.signcolumn = "yes"
-vim.cmd("set shiftwidth=2")
-vim.cmd("set rnu")
-vim.cmd("set nu")
---vim.opt.guicursor = ""
-vim.opt.mouse = "a"
-vim.cmd("highlight clear SignColumn")
-vim.o.clipboard = 'unnamedplus'
-vim.o.undofile = true
-vim.o.cursorline = false
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.showmode = false
-vim.o.completeopt = 'menuone,noselect'
-vim.opt.hlsearch = true
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.opt.scrolloff = 10
-vim.keymap.set('n', '<a-J>', ":move+<CR>")
-vim.keymap.set('n', '<a-K>', ":move-2<CR>")
-
-
--- KEYMAPS
 vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-b>', ':Explore<CR>', { noremap = true, silent = true })
@@ -63,12 +39,24 @@ vim.keymap.set("n", "Q", "<nop>")
 local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
 
+vim.keymap.set('n', '<leader>sw', function()
+	local word = vim.fn.expand("<cword>")
+	builtin.grep_string({ search = word })
+end)
+
+vim.keymap.set('n', '<leader>sW', function()
+	local word = vim.fn.expand("<cWORD>")
+	builtin.grep_string({ search = word })
+end)
+vim.keymap.set('n', '<leader>ps', function()
+	builtin.grep_string({ search = vim.fn.input("Grep > ") })
+end)
+
 -- UNDO TREE
-vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 
 --HARPOON
 local mark = require("harpoon.mark")
@@ -92,10 +80,17 @@ vim.keymap.set('n', '<leader>vfp', ':below G push<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>vfg', ':below G <CR>', { noremap = true })
 
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-	desc = 'Highlight when yanking (copying) text',
-	group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
+-- GIT BLAME
+vim.keymap.set('n', '<leader>be', ':GitBlameEnable <CR>', { noremap = true })
+vim.keymap.set('n', '<leader>bd', ':GitBlameDisable <CR>', { noremap = true })
+vim.keymap.set("n", "<leader>gs", ":Gitsigns toggle_signs <CR>", { noremap = true })
+
+-- THEMERY
+vim.keymap.set("n", "<leader>th", ":Themery <CR>", { noremap = true })
+
+function BlackBg()
+	vim.api.nvim_set_hl(0, "Normal", { bg = "None"})
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "None" })
+end
+
+vim.keymap.set("n", "<leader>bg", ":lua BlackBg() <CR>")
