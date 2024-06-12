@@ -4,8 +4,16 @@ return {
 		require("themery").setup({
 			themes = {
 				{
-					name = "minimal",
-					colorscheme = "lesser",
+					name = "vscode",
+					colorscheme = "vscode"
+				},
+				{
+					name = "decay",
+					colorscheme = "decay"
+				},
+				{
+					name = "gruvbox",
+					colorscheme = "gruvbox"
 				},
 				{
 					name = "onedark",

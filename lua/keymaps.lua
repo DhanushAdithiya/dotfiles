@@ -4,6 +4,12 @@ vim.api.nvim_set_keymap('n', '<C-b>', ':Explore<CR>', { noremap = true, silent =
 vim.keymap.set('x', '<', '<gv')
 vim.keymap.set('x', '>', '>gv')
 
+--SPLIT SCREEN NAVIGATION
+vim.keymap.set('n', '<m-k>', ':wincmd k<CR>', {silent = true})
+vim.keymap.set('n', '<m-j>', ':wincmd j<CR>', {silent = true})
+vim.keymap.set('n', '<m-h>', ':wincmd h<CR>', {silent = true})
+vim.keymap.set('n', '<m-l>', ':wincmd l<CR>', {silent = true})
+
 -- LSP KEYMAPS
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })

@@ -3,8 +3,10 @@ vim.o.signcolumn = "yes"
 vim.cmd("set shiftwidth=2")
 vim.cmd("set rnu")
 vim.cmd("set nu")
+vim.cmd("set conceallevel=2 ")
+vim.cmd("set concealcursor=")
 vim.cmd("NoMatchParen")
---vim.opt.guicursor = ""
+vim.opt.guicursor = ""
 vim.opt.mouse = "a"
 vim.cmd("highlight clear SignColumn")
 vim.o.clipboard = 'unnamedplus'
@@ -28,4 +30,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 		vim.highlight.on_yank()
 	end,
 })
-
