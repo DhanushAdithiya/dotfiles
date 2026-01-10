@@ -1,14 +1,20 @@
 vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-b>', ':Explore<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-b>', ':Neotree toggle<CR>', { noremap = true, silent = true })
 vim.keymap.set('x', '<', '<gv')
 vim.keymap.set('x', '>', '>gv')
 
+-- Buffer navigation
+vim.keymap.set('n', ']t', ':BufferNext <CR>', {silent = true})
+vim.keymap.set('n', '[t', ':BufferPrevious <CR>', {silent = true})
+vim.keymap.set('n', 'tx', ':BufferClose <CR>', {silent = true})
+vim.keymap.set('n', 'tn', ':tab new <CR>', {silent = true})
+
 --SPLIT SCREEN NAVIGATION
-vim.keymap.set('n', '<m-k>', ':wincmd k<CR>', {silent = true})
-vim.keymap.set('n', '<m-j>', ':wincmd j<CR>', {silent = true})
-vim.keymap.set('n', '<m-h>', ':wincmd h<CR>', {silent = true})
-vim.keymap.set('n', '<m-l>', ':wincmd l<CR>', {silent = true})
+vim.keymap.set('n', '<m-k>', ':wincmd k<CR>', { silent = true })
+vim.keymap.set('n', '<m-j>', ':wincmd j<CR>', { silent = true })
+vim.keymap.set('n', '<m-h>', ':wincmd h<CR>', { silent = true })
+vim.keymap.set('n', '<m-l>', ':wincmd l<CR>', { silent = true })
 
 -- LSP KEYMAPS
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -91,12 +97,23 @@ vim.keymap.set('n', '<leader>be', ':GitBlameEnable <CR>', { noremap = true })
 vim.keymap.set('n', '<leader>bd', ':GitBlameDisable <CR>', { noremap = true })
 vim.keymap.set("n", "<leader>gs", ":Gitsigns toggle_signs <CR>", { noremap = true })
 
--- THEMERY
-vim.keymap.set("n", "<leader>th", ":Themery <CR>", { noremap = true })
-
-function BlackBg()
-	vim.api.nvim_set_hl(0, "Normal", { bg = "None"})
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "None" })
-end
 
 vim.keymap.set("n", "<leader>bg", ":lua BlackBg() <CR>")
+vim.keymap.set("n", "<leader>tg", ":lua TransBg() <CR>")
+
+function TransBg()
+	vim.cmd [[
+		highlight Normal guibg=none
+		highlight NonText guibg=none
+		highlight Normal ctermbg=none
+		highlight NonText ctermbg=none
+	]]
+end
+
+function BlackBg()
+	vim.cmd [[hi Normal guibg=black]]
+end
+
+vim.keymap.set("n", "<space>tt", function()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
+end)

@@ -28,6 +28,14 @@ return {
 			lspconfig.gopls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
+				cmd = {"gopls"},
+				fileypes = {"go" ,"gomod", "gowork", "gotmpl"},
+				root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+				settings = {
+					gopls = {
+						completeUnimported = true,
+					},
+				}
 			})
 			lspconfig.tailwindcss.setup({
 				on_attach = on_attach,
@@ -36,6 +44,11 @@ return {
 			lspconfig.ts_ls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
+			})
+			lspconfig.emmet_language_server.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				fileypes = {"html" ,"jsx", "tsx"}
 			})
 			lspconfig.lua_ls.setup({
 				on_attach = on_attach,
@@ -59,6 +72,10 @@ return {
 						}
 					}
 				}
+			})
+			lspconfig.prismals.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
 			})
 			lspconfig.rust_analyzer.setup({
 				on_attach = on_attach,

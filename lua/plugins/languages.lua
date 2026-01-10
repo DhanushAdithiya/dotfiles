@@ -23,6 +23,9 @@ return {
 			dap = {
 				adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
 			},
+			inlay_hints = {
+				auto = true,
+			},
 			server = {
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
 				on_attach = function(_, bufnr)
