@@ -14,86 +14,67 @@ return {
 			})
 		end
 	},
+
 	{
-		"neovim/nvim-lspconfig",
-		lazy = false,
-		config = function()
-			local on_attach = require("lspconfig.configs").on_attach
-			local capabilities = require("lspconfig.configs").capabilities
-			local lspconfig = require("lspconfig")
-			local util = require("lspconfig/util")
-			--
-			-- LSP CONFIGS
-			--
-			lspconfig.gopls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				cmd = {"gopls"},
-				fileypes = {"go" ,"gomod", "gowork", "gotmpl"},
-				root_dir = util.root_pattern("go.work", "go.mod", ".git"),
-				settings = {
-					gopls = {
-						completeUnimported = true,
-					},
-				}
-			})
-			lspconfig.tailwindcss.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-			lspconfig.ts_ls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-			lspconfig.emmet_language_server.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				fileypes = {"html" ,"jsx", "tsx"}
-			})
-			lspconfig.lua_ls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-			lspconfig.clangd.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-			lspconfig.pyright.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					pyright = {
-						autoImportCompletion = true,
-					},
-					python = {
-						analysis = {
-							autoSearchPaths = true,
-							useLibraryCodeForTypes = true,
-						}
-					}
-				}
-			})
-			lspconfig.prismals.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-			lspconfig.rust_analyzer.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				fileypes = { "rust" },
-				root_dir = util.root_pattern("Cargo.toml"),
-				settings = {
-					['rust_analyzer'] = {
-						cargo = {
-							allFeatures = true,
-						}
-					}
-				}
+		vim.lsp.config("lua_ls", {
+			cmd = { "lua-language-server" },
+			filetypes = { "lua" }
+		}),
 
-			})
-		end
+		vim.lsp.config("rust_analyzer", {
+			cmd = { 'rust-analyzer' },
+			filetypes = { 'rust' },
+			root_markers = { "Cargo.toml", ".git" },
+			single_file_support = true,
+			settings = {
+				['rust-analyzer'] = {
+					diagnostics = {
+						enable = false,
+					}
+				}
+			},
+			before_init = function(init_params, config)
+				-- See https://github.com/rust-lang/rust-analyzer/blob/eb5da56d839ae0a9e9f50774fa3eb78eb0964550/docs/dev/lsp-extensions.md?plain=1#L26
+				if config.settings and config.settings['rust-analyzer'] then
+					init_params.initializationOptions = config.settings['rust-analyzer']
+				end
+			end,
+			fileypes = { "rust" }
+		}),
+
+		vim.lsp.config("gopls", {
+			cmd = { "gopls" },
+			filetypes = { "go", "gomod", "gowork", "gotmpl" },
+			root_markers = { "go.work", "go.mod", ".git" },
+			settings = {
+				gopls = {
+					completeUnimported = true,
+				},
+			}
+		}),
+
+
+		vim.lsp.config("pyright", {
+			settings = {
+				pyright = {
+					autoImportCompletion = true,
+				},
+				python = {
+					analysis = {
+						autoSearchPaths = true,
+						useLibraryCodeForTypes = true,
+					}
+				}
+			}
+		}),
+
+
+		vim.lsp.enable("lua_ls"),
+		vim.lsp.enable("rust_analyzer"),
+		vim.lsp.enable("gopls"),
+		vim.lsp.enable("pyright"),
+		vim.diagnostic.config({ virtual_text = true })
 	},
-
 	{ -- Autocompletion
 		'hrsh7th/nvim-cmp',
 		dependencies = {
