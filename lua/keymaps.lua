@@ -5,10 +5,10 @@ vim.keymap.set('x', '<', '<gv')
 vim.keymap.set('x', '>', '>gv')
 
 -- Buffer navigation
-vim.keymap.set('n', ']t', ':BufferNext <CR>', {silent = true})
-vim.keymap.set('n', '[t', ':BufferPrevious <CR>', {silent = true})
-vim.keymap.set('n', 'tx', ':BufferClose <CR>', {silent = true})
-vim.keymap.set('n', 'tn', ':tab new <CR>', {silent = true})
+vim.keymap.set('n', ']t', ':BufferNext <CR>', { silent = true })
+vim.keymap.set('n', '[t', ':BufferPrevious <CR>', { silent = true })
+vim.keymap.set('n', 'tx', ':BufferClose <CR>', { silent = true })
+vim.keymap.set('n', 'tn', ':tab new <CR>', { silent = true })
 
 --SPLIT SCREEN NAVIGATION
 vim.keymap.set('n', '<m-k>', ':wincmd k<CR>', { silent = true })

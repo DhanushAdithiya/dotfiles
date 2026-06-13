@@ -1,6 +1,8 @@
-vim.cmd.colorscheme("gruvbox")
+vim.cmd.colorscheme("tokyonight-night")
 vim.cmd("set tabstop=2")
 vim.o.signcolumn = "yes"
+vim.opt.colorcolumn = "100"
+opt.cursorline = true -- highlight the current cursor line
 vim.cmd("set shiftwidth=2")
 vim.cmd("set rnu")
 vim.cmd("set nu")

@@ -4,42 +4,40 @@ return {
 		lazy = false,
 		config = function()
 			require("mason").setup()
-		end
+		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer" }
+				ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer" },
 			})
-		end
+		end,
 	},
-
 	{
 		vim.lsp.config("lua_ls", {
 			cmd = { "lua-language-server" },
-			filetypes = { "lua" }
+			filetypes = { "lua" },
 		}),
 
 		vim.lsp.config("rust_analyzer", {
-			cmd = { 'rust-analyzer' },
-			filetypes = { 'rust' },
+			cmd = { "rust-analyzer" },
+			filetypes = { "rust" },
 			root_markers = { "Cargo.toml", ".git" },
 			single_file_support = true,
 			settings = {
-				['rust-analyzer'] = {
+				["rust-analyzer"] = {
 					diagnostics = {
 						enable = false,
-					}
-				}
+					},
+				},
 			},
 			before_init = function(init_params, config)
-				-- See https://github.com/rust-lang/rust-analyzer/blob/eb5da56d839ae0a9e9f50774fa3eb78eb0964550/docs/dev/lsp-extensions.md?plain=1#L26
-				if config.settings and config.settings['rust-analyzer'] then
-					init_params.initializationOptions = config.settings['rust-analyzer']
+				if config.settings and config.settings["rust-analyzer"] then
+					init_params.initializationOptions = config.settings["rust-analyzer"]
 				end
 			end,
-			fileypes = { "rust" }
+			fileypes = { "rust" },
 		}),
 
 		vim.lsp.config("gopls", {
@@ -50,10 +48,8 @@ return {
 				gopls = {
 					completeUnimported = true,
 				},
-			}
+			},
 		}),
-
-
 		vim.lsp.config("pyright", {
 			settings = {
 				pyright = {
@@ -63,61 +59,60 @@ return {
 					analysis = {
 						autoSearchPaths = true,
 						useLibraryCodeForTypes = true,
-					}
-				}
-			}
+					},
+				},
+			},
 		}),
-
 
 		vim.lsp.enable("lua_ls"),
 		vim.lsp.enable("rust_analyzer"),
 		vim.lsp.enable("gopls"),
 		vim.lsp.enable("pyright"),
-		vim.diagnostic.config({ virtual_text = true })
+		vim.diagnostic.config({ virtual_text = true }),
 	},
 	{ -- Autocompletion
-		'hrsh7th/nvim-cmp',
+		"hrsh7th/nvim-cmp",
 		dependencies = {
 			-- Snippet Engine & its associated nvim-cmp source
-			'L3MON4D3/LuaSnip',
-			'saadparwaiz1/cmp_luasnip',
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
 
 			-- Adds LSP completion capabilities
-			'hrsh7th/cmp-nvim-lsp',
-			'hrsh7th/cmp-path',
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-path",
 
 			-- Adds a number of user-friendly snippets
-			'rafamadriz/friendly-snippets',
+			"rafamadriz/friendly-snippets",
 		},
 
 		config = function()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-			local cmp = require 'cmp'
-			local luasnip = require 'luasnip'
-			require('luasnip.loaders.from_vscode').lazy_load()
-			luasnip.config.setup {}
+			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+			local cmp = require("cmp")
+			local luasnip = require("luasnip")
+			require("luasnip.loaders.from_vscode").lazy_load()
+			luasnip.config.setup({})
 
-			cmp.setup {
+			cmp.setup({
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
 					end,
 				},
 				completion = {
-					completeopt = 'menu,menuone,noinsert',
+					completeopt = "menu,menuone,noinsert",
 				},
-				mapping = cmp.mapping.preset.insert {
-					['<C-n>'] = cmp.mapping.select_next_item(),
-					['<C-p>'] = cmp.mapping.select_prev_item(),
-					['<C-b>'] = cmp.mapping.scroll_docs(-4),
-					['<C-f>'] = cmp.mapping.scroll_docs(4),
-					['<C-Space>'] = cmp.mapping.complete {},
-					['<CR>'] = cmp.mapping.confirm {
+				mapping = cmp.mapping.preset.insert({
+					["<C-n>"] = cmp.mapping.select_next_item(),
+					["<C-p>"] = cmp.mapping.select_prev_item(),
+					["<C-b>"] = cmp.mapping.scroll_docs(-4),
+					["<C-f>"] = cmp.mapping.scroll_docs(4),
+					["<C-Space>"] = cmp.mapping.complete({}),
+					["<CR>"] = cmp.mapping.confirm({
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = true,
-					},
-					['<Tab>'] = cmp.mapping(function(fallback)
+					}),
+					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
 						elseif luasnip.expand_or_locally_jumpable() then
@@ -125,8 +120,8 @@ return {
 						else
 							fallback()
 						end
-					end, { 'i', 's' }),
-					['<S-Tab>'] = cmp.mapping(function(fallback)
+					end, { "i", "s" }),
+					["<S-Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item()
 						elseif luasnip.locally_jumpable(-1) then
@@ -134,14 +129,14 @@ return {
 						else
 							fallback()
 						end
-					end, { 'i', 's' }),
-				},
+					end, { "i", "s" }),
+				}),
 				sources = {
-					{ name = 'nvim_lsp' },
-					{ name = 'luasnip' },
-					{ name = 'path' },
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
+					{ name = "path" },
 				},
-			}
-		end
-	}
+			})
+		end,
+	},
 }
