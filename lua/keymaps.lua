@@ -1,6 +1,16 @@
 vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = true, silent = true })
+
+-- USED TO TOGGLE NEOTREE
 vim.api.nvim_set_keymap('n', '<C-b>', ':Neotree toggle<CR>', { noremap = true, silent = true })
+require("neo-tree").setup({
+  window = {
+    mappings = {
+      ["<C-b>"] = "close_window",
+    }
+  }
+})
+
 vim.keymap.set('x', '<', '<gv')
 vim.keymap.set('x', '>', '>gv')
 
@@ -9,6 +19,7 @@ vim.keymap.set('n', ']t', ':BufferNext <CR>', { silent = true })
 vim.keymap.set('n', '[t', ':BufferPrevious <CR>', { silent = true })
 vim.keymap.set('n', 'tx', ':BufferClose <CR>', { silent = true })
 vim.keymap.set('n', 'tn', ':tab new <CR>', { silent = true })
+vim.keymap.set('n', '<leader>tt', ':BufferCloseAllButCurrent <CR>', {silent = false})
 
 --SPLIT SCREEN NAVIGATION
 vim.keymap.set('n', '<m-k>', ':wincmd k<CR>', { silent = true })
